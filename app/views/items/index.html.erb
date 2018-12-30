@@ -1,0 +1,24 @@
+<h1>Items</h2>
+
+<% if @items.empty? %>
+  <b>No items in store</b>
+<% else %>
+
+<table>
+    <tr>
+      <th> item id </th>
+      <th> Name </th>
+      <th> Price </th>
+      <th></th>
+    </tr>
+
+
+<% @items.each do |i| %>
+
+     <tr>
+       <th><%= i.id %></th>
+       <th><%= link_to i.name, item_path(i) %></th>
+       <th><%= i.price %></th>
+       <th><%= link_to "Удалить", i, method: :delete, data: {confirm: "Точно удалить?"} %></th>
+  <% end %>
+<% end %>
