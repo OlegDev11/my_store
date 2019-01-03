@@ -10,15 +10,18 @@
       <th> Name </th>
       <th> Price </th>
       <th></th>
+      <th> Голосовать</th>
     </tr>
 
 
 <% @items.each do |i| %>
 
      <tr>
-       <th><%= i.id %></th>
-       <th><%= link_to i.name, item_path(i) %></th>
-       <th><%= i.price %></th>
-       <th><%= link_to "Удалить", i, method: :delete, data: {confirm: "Точно удалить?"} %></th>
+       <td><%= i.id %></td>
+       <td><%= link_to i.name, item_path(i) %></td>
+       <td><%= i.price %></td>
+       <td><%= link_to "Удалить", i, method: :delete, data: {confirm: "Точно удалить?"} %></td>
+       <td>Рейтинг: <%= i.votes_count %><%= link_to "+", upvote_item_path(i) %></td>
+     </tr>
   <% end %>
 <% end %>

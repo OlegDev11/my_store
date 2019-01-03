@@ -1,35 +1,41 @@
 class ItemsController < ApplicationController
-#код повтояется, выносим его в один метод @item = Item.create(item_params)
-before_action :find_item,          only: [:show, :edit, :update, :destroy]
-#для запрета доступа пользователю к этим методам, но разрешить для админа
-before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
+  #код повтояется, выносим его в один метод @item = Item.create(item_params)
+  before_action :find_item,          only: [:show, :edit, :update, :destroy, :upvote]     # only: и :except так же можно использовать
+  #для запрета доступа пользователю к этим методам, но разрешить для админа
+  #before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
 
   def index
-    @items = Item.all                            #поиск в БД всех обектов
+    @items = Item.all                              #поиск в БД всех обектов
   end
 
-#      /items       POST
-   def create                                     #новый обект, который мы создаём и сохраняем в БД
-   @item = Item.create(item_params)
-   if @item.errors.empty?                         #проверяет есть ли ошибки
-    redirect_to item_path(@item)                  # redirect_to делает ещё один запрос на сервер по пути item_path(items/:id)
-  # render "show"
-   else
+  def upvote                                       #возможность голосовать за тот или иной товар
+    @item.increment!(:votes_count)
+    redirect_to action: :index
+  end
+
+  #      /items       POST
+  def create                                      #новый обект, который мы создаём и сохраняем в БД
+    @item = Item.create(item_params)
+    if @item.errors.empty?                        #проверяет есть ли ошибки
+    redirect_to item_path(@item)                  #redirect_to делает ещё один запрос на сервер по пути item_path(items/:id)
+    # render "show"
+    else
      render "new"
-   end
- end
+    end
+  end
 
 #URL   /items/1      GET      HTTP метод
    def show                                           #то что выводит на экран после сохранения в БД
 #     @item = Item.find(params[:id])
      unless @item
-     render "items/show"
+       render html: "Page not found", status: 404
+     end
    end
 
 #     /items/1       PUT (всё равно что POST)
-   def update                                         #обновляем форму
-  #   @item = Item.find(params[:id])                   #поиск товара
-     @item.update_attributes(item_params)             #обновляем атрибуты
+   def update                                                       #обновляем форму
+  #   @item = Item.find(params[:id])                                #поиск товара
+     @item.update_attributes(item_params)                           #обновляем атрибуты
        if @item.errors.empty?
          redirect_to item_path(@item)
        else
@@ -43,7 +49,7 @@ before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destro
    end
 
 #    /items/1/edit    GET
-   def edit                                             #редоктируем атрибты нашего товара
+   def edit                                                          #редоктируем атрибты нашего товара
   #   @item = Item.find(params[:id])
    end
 
@@ -51,7 +57,7 @@ before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destro
       def destroy
     #    @item = Item.find(params[:id])
         @item.destroy
-        redirect_to action: "index"
+        redirect_to  action: "index"
       end
 
   #метод для сохранения параметров в БД
@@ -60,12 +66,11 @@ private
          params.require(:item).permit(:price, :name, :weight, :description)
       end
 
-      def find_item
+      def find_item                                                       #метод для повторяющегося кода
         @item = Item.find(params[:id])
       end
-
+#метод для запрета доступа пользователю к назначенным методам (фильтры)
       def check_if_admin
-        render html: "Access denied", status: 403 unless params [:admin]
+  #      render html: "Access denied", status: 403 unless params[:admin]
       end
-    end
  end
