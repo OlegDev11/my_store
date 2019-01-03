@@ -5,22 +5,27 @@ class ItemsController < ApplicationController
   #before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
 
   def index
-    @items = Item.all                              #поиск в БД всех обектов
+    @items = Item.all                                 #поиск в БД всех обектов
   end
 
-  def upvote                                       #возможность голосовать за тот или иной товар
+  def upvote                                          #возможность голосовать за тот или иной товар
     @item.increment!(:votes_count)
     redirect_to action: :index
   end
 
+  def expensive                                      #для поиска товара, который больше 1000 по цене
+    @items = Item.where("price > 1000")
+    render "index"
+  end
+
   #      /items       POST
-  def create                                      #новый обект, который мы создаём и сохраняем в БД
+  def create                                          #новый обект, который мы создаём и сохраняем в БД
     @item = Item.create(item_params)
-    if @item.errors.empty?                        #проверяет есть ли ошибки
-    redirect_to item_path(@item)                  #redirect_to делает ещё один запрос на сервер по пути item_path(items/:id)
+    if @item.errors.empty?                            #проверяет есть ли ошибки
+    redirect_to item_path(@item)                      #redirect_to делает ещё один запрос на сервер по пути item_path(items/:id)
     # render "show"
     else
-     render "new"
+      render "new"
     end
   end
 
@@ -49,16 +54,16 @@ class ItemsController < ApplicationController
    end
 
 #    /items/1/edit    GET
-   def edit                                                          #редоктируем атрибты нашего товара
+   def edit                                                                 #редоктируем атрибты нашего товара
   #   @item = Item.find(params[:id])
    end
 
    #     /items/1        DELETE
-      def destroy
+   def destroy
     #    @item = Item.find(params[:id])
-        @item.destroy
-        redirect_to  action: "index"
-      end
+     @item.destroy
+     redirect_to  action: "index"
+   end
 
   #метод для сохранения параметров в БД
 private
@@ -66,7 +71,7 @@ private
          params.require(:item).permit(:price, :name, :weight, :description)
       end
 
-      def find_item                                                       #метод для повторяющегося кода
+      def find_item                                                        #метод для повторяющегося кода
         @item = Item.find(params[:id])
       end
 #метод для запрета доступа пользователю к назначенным методам (фильтры)
