@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   #код повтояется, выносим его в один метод @item = Item.create(item_params)
   before_action :find_item,          only: [:show, :edit, :update, :destroy, :upvote]     # only: и :except так же можно использовать
   #для запрета доступа пользователю к этим методам, но разрешить для админа
-  #before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
+# before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
 
   def index
     @items = Item.all                                 #поиск в БД всех обектов
@@ -72,10 +72,8 @@ private
       end
 
       def find_item                                                        #метод для повторяющегося кода
-        @item = Item.find(params[:id])
-      end
-#метод для запрета доступа пользователю к назначенным методам (фильтры)
-      def check_if_admin
-  #      render html: "Access denied", status: 403 unless params[:admin]
+    #  @item = Item.find(params[:id])
+        @item = Item.where(id: params[:id]).first
+        render_404 unless @item
       end
  end
