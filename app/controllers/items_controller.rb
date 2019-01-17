@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   #код повтояется, выносим его в один метод @item = Item.create(item_params)
   before_action :find_item,          only: [:show, :edit, :update, :destroy, :upvote]     # only: и :except так же можно использовать
   #для запрета доступа пользователю к этим методам, но разрешить для админа
-# before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
+  before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
 
   def index
     @items = Item.all                                 #поиск в БД всех обектов
