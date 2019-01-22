@@ -4,11 +4,12 @@
    <b>No items in store</b>
 <% else %>
 
-<table>
+<table class="table table-striped">
     <tr>
       <th> item id </th>
       <th> Name </th>
       <th> Price </th>
+      <th> Created_at </th>
       <th></th>
       <th> Голосовать</th>
     </tr>
@@ -20,6 +21,7 @@
        <td><%= i.id %></td>
        <td><%= link_to i.name, item_path(i) %></td>
        <td><%= i.price %></td>
+       <td><%= i.created_at %></td>
        <td><%= link_to "Удалить", i, method: :delete, data: {confirm: "Точно удалить?"} %></td>
        <td>Рейтинг: <%= i.votes_count %><%= link_to "+", upvote_item_path(i) %></td>
      </tr>

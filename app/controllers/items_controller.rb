@@ -2,10 +2,14 @@ class ItemsController < ApplicationController
   #код повтояется, выносим его в один метод @item = Item.create(item_params)
   before_action :find_item,          only: [:show, :edit, :update, :destroy, :upvote]     # only: и :except так же можно использовать
   #для запрета доступа пользователю к этим методам, но разрешить для админа
-  before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
+  #before_action :check_if_admin,     only: [:edit, :update, :new, :cewate, :destroy]
 
   def index
-    @items = Item.all                                 #поиск в БД всех обектов
+     @items = Item
+     @items = Item.where("price >= ?", params[:price_from]) if params[:price_from]
+     @items = @items.order("votes_count DESC", "price").limit(20)         # сортировка от самого популярного товара до непоп.
+  #  @items = Item.where("price >= ?", params[:price_from])               #поиск по цене больше или равно
+  #  @items = Item.all                                                    #поиск в БД всех обектов all
   end
 
   def upvote                                          #возможность голосовать за тот или иной товар
@@ -19,7 +23,8 @@ class ItemsController < ApplicationController
   end
 
   #      /items       POST
-  def create                                          #новый обект, который мы создаём и сохраняем в БД
+  def create
+    Time.now.strftime("%d/%m/%Y %H:%M")                                        #новый обект, который мы создаём и сохраняем в БД
     @item = Item.create(item_params)
     if @item.errors.empty?                            #проверяет есть ли ошибки
     redirect_to item_path(@item)                      #redirect_to делает ещё один запрос на сервер по пути item_path(items/:id)

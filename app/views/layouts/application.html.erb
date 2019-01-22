@@ -5,16 +5,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+     <h5 class="my-0 mr-md-auto font-weight-bold">Мой учебный проэкт "My_store"</h5>
+     <nav class="my-3 my-md-0 mr-md-0">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= link_to "Зарегистрироватся", new_use_registration_path %> or
-    <%= link_to "Вход", new_use_session_path %> /
-    <%= link_to "Выход", destroy_use_session_path, :method => :delete %>
+       <span class="p-2 text-dark"><%= link_to "Зарегистрироватся", new_use_registration_path %></span> or
+       <span class="p-2 text-dark"><%= link_to "Вход", new_use_session_path %></span> |
+       <span class="p-2 text-dark"><%= link_to "Выход", destroy_use_session_path, :method => :delete %></span>
+     </nav>
+       <span class="p-0 text-dark"><%= link_to "Добавление товара", new_item_path %></span>
+   </div>
+
+  <div class = "container">
     <%= yield %>
   </body>
 </html>
