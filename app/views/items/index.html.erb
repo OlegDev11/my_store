@@ -16,10 +16,12 @@
 
 
 <% @items.each do |i| %>
-
      <tr>
        <td><%= i.id %></td>
-       <td><%= link_to i.name, item_path(i) %></td>
+       <td>
+        <%= image_tag i.avatar.url, width: '100px', height: '100px' %>
+          <%= link_to i.name, item_path(i) %>
+       </td>
        <td><%= i.price %></td>
        <td><%= i.created_at %></td>
        <td><%= link_to "Удалить", i, method: :delete, data: {confirm: "Точно удалить?"} %></td>

@@ -3,6 +3,9 @@
 <ul>
   <li>Цена:          <%= @item.price %> гр.</li>
   <li>Вес:           <%= @item.weight %> кг.</li>
-  <li>Описание:      <%= urls_to_images(@item.description) %></li>
-  
+  <li>Описание:      <%= @item.description %></li>
+                     <%= image_tag @item.avatar.url(:medium) %>
+                     <br>
+                     <br>
+<p><%= link_to "Редактировать", edit_item_path(@item), :class => 'btn btn-warning' %></p>
 </ul>
