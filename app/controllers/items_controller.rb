@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
      @items = @items.where("created_at >= ?", 1.day.ago)             if params[:today]
      @items = @items.where("votes_count >= ?", params[:votes_count]) if params[:votes_count]
      @items = @items.order("votes_count DESC", "price").limit(20)         # сортировка от самого популярного товара до непоп.
-  #   @items = @items.includes(:avatar)
+
   #  @items = Item.where("price >= ?", params[:price_from])               #поиск по цене больше или равно
   #  @items = Item.all                                                    #поиск в БД всех обектов all
   end
@@ -49,9 +49,11 @@ class ItemsController < ApplicationController
   #   @item = Item.find(params[:id])                                #поиск товара
      @item.update_attributes(item_params)                           #обновляем атрибуты
        if @item.errors.empty?
+         flash[:success]= "Item successfully updated!"
          redirect_to item_path(@item)
        else
-          render "edit"
+         flash.now[:error] = "You made mistakes in your form! please correct them"
+         render "edit"
       end
    end
 

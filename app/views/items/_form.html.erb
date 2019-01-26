@@ -1,0 +1,9 @@
+<p style="color: red;"><%= flash[:error] %></p>
+
+<p><br/><%= f.input :name %></p>
+<p><br/><%= f.input :price %></p>
+<p><br/><%= f.input :weight %></p>
+<p><br/><%= f.input :description %></p>
+     <p><%= f.input :avatar %></p>
+
+<%= hidden_field_tag :admin, params[:admin] %>

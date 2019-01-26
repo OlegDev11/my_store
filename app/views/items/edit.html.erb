@@ -1,12 +1,8 @@
 <h1>Edit new item</h1>
 
-<%= form_for @item do |f| %>
+<%= simple_form_for @item do |f| %>
 
-<p>Название: <br/><%= f.text_field :name %></p>
-<p>Цена:     <br/><%= f.text_field :price %></p>
-<p>Вес:      <br/><%= f.text_field :weight %></p>
-<p>Описание: <br/><%= f.text_area  :description %></p>
-               <p><%= f.file_field :avatar %></p>
-<p><br/><%= f.submit "Сохранить товар"%></p>
+    <%= render partial: "form", locals: {f: f} %>
+    <p><br/><%= f.submit "Сохранить товар"%></p>
 
  <% end %>

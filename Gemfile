@@ -4,10 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 gem 'paperclip', '~> 6.0.0'
-gem 'twitter-bootstrap-rails'
 gem 'rails', '~> 5.2.2'
 gem 'sqlite3'
 gem 'puma', '~> 3.11'
+gem 'bootstrap-sass', '~> 3.4.0'
+gem 'sassc-rails', '>= 2.0.0'
+gem 'twitter-bootstrap-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -15,7 +17,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
-
+gem 'haml-rails'
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

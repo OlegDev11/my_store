@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   validates :price, numericality: {greater_than: 0, allow_nil: true}   #создаём валидацию больше чем 0, и если не чего не писать
   validates :name, :description, :price, :weight, presence: true       #создаём обязательную валидацию
+  validates :name, :price, presence: true
 
   has_many :positions
   has_many :carts, through: :positions
