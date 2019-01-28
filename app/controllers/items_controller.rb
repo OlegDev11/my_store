@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
 
 #URL   /items/1      GET      HTTP метод
    def show                                           #то что выводит на экран после сохранения в БД
+     raise "exception test"
 #     @item = Item.find(params[:id])
      unless @item
        render html: "Page not found", status: 404

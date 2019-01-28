@@ -90,6 +90,9 @@ GEM
       warden (~> 1.2.3)
     erubi (1.8.0)
     erubis (2.7.0)
+    exception_notification (4.3.0)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     ffi (1.9.25)
     globalid (0.4.1)
@@ -279,6 +282,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise (~> 4.2)
+  exception_notification
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
