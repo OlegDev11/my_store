@@ -1,4 +1,4 @@
-if Rails.env == "production" || Rails.env == "stading" || Rails.env == "development"
+if Rails.env == "production" || Rails.env == "stading" 
 
   exceptions = []
   exceptions << 'ActiveRecord::RecordNotFound'
@@ -18,7 +18,7 @@ if Rails.env == "production" || Rails.env == "stading" || Rails.env == "developm
     email: {
       email_prefix: "[#{server_name} error]",
       sender_address: "error500@mystore.com",
-      exception_recipients: ["mr.mastercredit@gmail.com"]
+      exception_recipients: ["mr.mastercredit@gmail.com", "pavlenko111@i.ua"]
       },
       ignore_exceptions: exceptions
   end

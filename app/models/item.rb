@@ -3,9 +3,9 @@ class Item < ApplicationRecord
   validates :name, :description, :price, :weight, presence: true       #создаём обязательную валидацию
   validates :name, :price, presence: true
 
+  has_many :comments, dependent: :destroy
   has_many :positions
   has_many :carts, through: :positions
-  has_many :comments, as: :commentable
   has_one  :avatar                                 #Ассоциация (у товара есть одна картинка)
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"

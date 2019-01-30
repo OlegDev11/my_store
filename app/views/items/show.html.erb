@@ -10,3 +10,22 @@
                      <br>
 <p><%= link_to "Редактировать", edit_item_path(@item), :class => 'btn btn-warning' %></p>
 </ul>
+
+<hr>
+ <h2>Коментарии</h2>
+     <% @item.comments.each do |comment| %>
+  <div class = "alert alert-light">
+    <p><%= comment.body %></p>
+  </div>
+  <% end %>
+<hr>
+
+      <%= form_for([@item, @item.comments.build]) do |f| %>
+
+<p>
+     Текст комминтария<br>
+      <%= f.text_area(:body, {:class => 'form-control'}) %>
+</p>
+<p>
+      <%= f.submit("Добавить коментарий",{:class => 'btn btn-success'}) %>
+<% end %>
