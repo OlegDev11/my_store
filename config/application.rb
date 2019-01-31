@@ -1,5 +1,5 @@
 require_relative 'boot'
-require 'devise'
+
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -20,7 +20,7 @@ module MyStore
     # the framework and any gems in your application.
     config.generators do |g|
       g.template_engine :haml
-      g.test_framework  :rspec, fixtures:, '~> 4.2' true, views: false
+      g.test_framework  :rspec, fixtures: true, views: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
