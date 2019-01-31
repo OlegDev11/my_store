@@ -20,6 +20,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails'
 gem 'simple_form'
 gem 'exception_notification'
+gem 'gmaps4rails'
 
 group :test do
   gem 'rspec-rails'

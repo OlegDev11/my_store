@@ -21,7 +21,6 @@
 <hr>
 
       <%= form_for([@item, @item.comments.build]) do |f| %>
-
 <p>
      Текст комминтария<br>
       <%= f.text_area(:body, {:class => 'form-control'}) %>
