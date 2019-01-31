@@ -5,7 +5,6 @@ ruby '2.5.3'
 
 gem 'paperclip', '~> 6.0.0'
 gem 'rails', '~> 5.2.2'
-gem 'sqlite3'
 gem 'puma', '~> 3.11'
 gem 'bootstrap-sass', '~> 3.4.0'
 gem 'sassc-rails', '>= 2.0.0'
@@ -27,10 +26,15 @@ group :test do
   gem 'factory_girl_rails'
 end
 
+group :production do
+     gem 'pg'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'devise', '~> 4.2'
+  gem 'sqlite3'
 end
 
 group :development do
