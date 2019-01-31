@@ -3,7 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
-gem 'paperclip', '~> 6.0.0'
+gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk', '< 2'
 gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 gem 'bootstrap-sass', '~> 3.4.0'
@@ -33,7 +34,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'devise', '~> 4.2'
+  gem 'devise'
   gem 'sqlite3'
 end
 
