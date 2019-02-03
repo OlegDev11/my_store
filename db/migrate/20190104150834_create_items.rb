@@ -7,7 +7,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.float    :weight           #вес товара
       t.timestamps
     end
-    #  add_index :items, :price     #это то что нужно проиндексировать
-    #  add_index :items, :name      #для поиска по индексу полей price and name
+      add_index :items, :price     #это то что нужно проиндексировать
+      add_index :items, :name      #для поиска по индексу полей price and name
   end
 end
