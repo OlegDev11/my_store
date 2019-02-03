@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
+gem 'sqlite3'
 gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '< 2'
 gem 'rails', '~> 5.2.2'
