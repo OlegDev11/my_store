@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+
 ruby '2.5.3'
 
-#gem 'sqlite3'
-gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
+gem 'sqlite3', '~> 1.3.6'
+gem 'paperclip', git: "https://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '< 2'
 gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
@@ -23,27 +24,30 @@ gem 'simple_form'
 gem 'exception_notification'
 gem 'gmaps4rails'
 gem 'devise', git: "https://github.com/plataformatec/devise"
+gem 'pacecar'
 
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
 
-group :production do
-     gem 'pg'
-end
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
 end
 
-group :development do
+group :development, :production do
+  gem 'capistrano', '~> 3.8',            require: false
+  gem 'capistrano-rails', '~> 1.4',      require: false
+  gem 'capistrano-passenger', '~> 0.2',  require: false
+  gem 'capistrano-rbenv', '~> 2.1',      require: false
+  gem 'capistrano-bundler', '~> 1.5',    require: false
+
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
 
 group :test do
   gem 'capybara', '>= 2.15'
@@ -51,4 +55,6 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :production do
+     gem 'pg'
+end

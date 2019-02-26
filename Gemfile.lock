@@ -1,5 +1,16 @@
 GIT
-  remote: git://github.com/thoughtbot/paperclip.git
+  remote: https://github.com/plataformatec/devise
+  revision: 4e4e42e1ae291b69822d7bb8a487a869e1e5d2d9
+  specs:
+    devise (4.6.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 6.0)
+      responders
+      warden (~> 1.2.3)
+
+GIT
+  remote: https://github.com/thoughtbot/paperclip.git
   revision: 17050e41aa31613da23c7c1b56381f431ee9d3ff
   specs:
     paperclip (6.1.0)
@@ -8,17 +19,6 @@ GIT
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-
-GIT
-  remote: https://github.com/plataformatec/devise
-  revision: 6064ca8b736faafa2f597e5319c1a43938c2eae9
-  specs:
-    devise (4.5.0)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 6.0)
-      responders
-      warden (~> 1.2.3)
 
 GEM
   remote: https://rubygems.org/
@@ -66,10 +66,12 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    airbrussh (1.3.1)
+      sshkit (>= 1.6.1, != 1.7.0)
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
-    autoprefixer-rails (9.4.7)
+    autoprefixer-rails (9.4.9)
       execjs
     aws-sdk (1.67.0)
       aws-sdk-v1 (= 1.67.0)
@@ -78,14 +80,29 @@ GEM
       nokogiri (~> 1)
     bcrypt (3.1.12)
     bindex (0.5.0)
-    bootsnap (1.3.2)
+    bootsnap (1.4.1)
       msgpack (~> 1.0)
-    bootstrap-sass (3.4.0)
+    bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     builder (3.2.3)
-    byebug (10.0.2)
-    capybara (3.13.2)
+    byebug (11.0.0)
+    capistrano (3.11.0)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.5.0)
+      capistrano (~> 3.1)
+    capistrano-passenger (0.2.0)
+      capistrano (~> 3.0)
+    capistrano-rails (1.4.0)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
+    capybara (3.14.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -121,7 +138,7 @@ GEM
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
-    ffi (1.9.25)
+    ffi (1.10.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
@@ -178,10 +195,15 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.6)
     multi_json (1.13.1)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (5.1.0)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pacecar (2.0.0)
+      activerecord (>= 4.0.0)
     pg (1.1.4)
     public_suffix (3.0.3)
     puma (3.12.0)
@@ -252,8 +274,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sassc (2.0.0)
-      ffi (~> 1.9.6)
+    sassc (2.0.1)
+      ffi (~> 1.9)
       rake
     sassc-rails (2.1.0)
       railties (>= 4.0.0)
@@ -281,6 +303,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    sshkit (1.18.2)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     temple (0.8.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
@@ -320,6 +345,11 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-sass (~> 3.4.0)
   byebug
+  capistrano (~> 3.8)
+  capistrano-bundler (~> 1.5)
+  capistrano-passenger (~> 0.2)
+  capistrano-rails (~> 1.4)
+  capistrano-rbenv (~> 2.1)
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
@@ -331,6 +361,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  pacecar
   paperclip!
   pg
   puma (~> 3.11)
@@ -342,10 +373,9 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
+  sqlite3 (~> 1.3.6)
   turbolinks (~> 5)
   twitter-bootstrap-rails
-  tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
 
@@ -353,4 +383,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   1.17.1
+   2.0.1
