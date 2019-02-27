@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 
-ruby '2.5.3'
+ruby '2.6.1'
 
 gem 'sqlite3', '~> 1.3.6'
 gem 'paperclip', git: "https://github.com/thoughtbot/paperclip.git"
