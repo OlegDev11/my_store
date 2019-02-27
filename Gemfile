@@ -35,19 +35,20 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
-group :development, :production do
-  gem 'capistrano', '~> 3.8',            require: false
-  gem 'capistrano-rails', '~> 1.4',      require: false
-  gem 'capistrano-passenger', '~> 0.2',  require: false
-  gem 'capistrano-rbenv', '~> 2.1',      require: false
-  gem 'capistrano-bundler', '~> 1.5',    require: false
-
+group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :deployment do
+  gem 'capistrano', '~> 3.8'
+  gem 'capistrano-rails', '~> 1.4'
+  gem 'capistrano-passenger', '~> 0.2'
+  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano-bundler', '~> 1.5'
+end
 
 group :test do
   gem 'capybara', '>= 2.15'
