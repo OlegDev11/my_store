@@ -12,7 +12,7 @@ set :deploy_to, "/home/deploy/apps/my_store"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
-append :linked_files, 'config/database.yml', 'config/secrete.yml'
+append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads'
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
